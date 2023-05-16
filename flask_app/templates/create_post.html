@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<h1 class="welcome"> Welcome {{session['my_name']}}</h1>
+
+
+    <form class= "quiz" action="/new_job_available" method="POST">
+    <div>
+        <label for="dog_name">Dog's name:</label>
+        <input class= "bar" type="text" value="" name="dog_name">
+    </div>
+    <div>
+        <label for="pickup_date">Pickup Date?</label>
+        <input class="bar" type="date" name="pickup_date">
+    </div>
+    <div class="side_by_side">
+        <label for="instructions">Special Instructions:</label>
+        <textarea class="textarea" name="instructions" cols="30" rows="7"></textarea>
+    </div>
+    <input class= "" type="submit" value="Post Your Poop!">
+    </form>
+
+{% with messages=get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+  
+
+<!-- <a href="/shows">Back to Shows</a> -->
+<a href="/logout">Logout</a>
+
+  
+</body>
+</html>

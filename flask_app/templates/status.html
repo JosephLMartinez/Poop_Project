@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+  
+  </head>
+  <body>
+
+
+<!-- I thought that  should be available outside of forloops... but I couldn't even get it to show in an IF statement -->
+<h2 class="welcome"> Welcome {{session['my_name']}}</h2>
+<h1 class="wide">Current Poop Appointment</h1>
+<div class="outline wide">
+    <div class="">
+        <div class="side_by_side">
+            <p class="left">Dog's Name: </p>
+            <p class="right">{{puppy_appointment[0]['dog_name']}}</p>
+        </div>
+        <div class="side_by_side">
+            <p class="left"> Pickup Date:</p>
+            <p class="right">{{puppy_appointment[0]['pickup_date']}}</p>
+        </div>
+        <div class="side_by_side">
+            <p class="left">Special Instructions: </p>
+            <p class="right">{{puppy_appointment[0]['instructions']}}</p>
+        </div>
+        <div class="side_by_side">
+            <p class="left">Is it Scheduled?: </p>
+            {% if not puppy_appointment[0]['picker_upper_id'] %}
+                <p class="right">No Takers Yet</p>
+            {% else %}
+                <p class="right">Mission Accepted</p>
+            {% endif %}
+        </div>
+        <div class="side_by_side">
+            <p class="left">Is it completed?</p>
+            {% if puppy_appointment[0]['finished']=="No" %}
+                <p class="right">No</p>
+            {% elif puppy_appointment[0]['finished']=="Yes" %}
+            <p class="right">Yes</p>
+            {% endif %}
+        </div>
+        <div class="top_bottom">
+            {% if puppy_appointment[0]['finished']=="Yes" %}
+                <a href="/delete_appointment">Please Confrim</a>
+            {% endif %}
+            <a href="/edit_appointment/{{session['user']}}">Change Pickup Appointment Information</a>
+        </div>
+    </div>
+</div>
+<a href="/logout">Logout</a>
+
+
+</body>
+</html>
